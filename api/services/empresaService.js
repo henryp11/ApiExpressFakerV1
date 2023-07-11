@@ -5,14 +5,14 @@ const { faker } = require("@faker-js/faker");
 const boom = require("@hapi/boom"); //Libreria para control de Status Code
 class EmpresasServices {
   //Para el objeto que se creará genero su constructor
-  constructor() {
+  constructor(size) {
     this.empresas = []; //Array para guardar los registros en este caso las empresas
-    this.generate(); //Inicializo la funicón que genere las empresas o las traiga de cualquer repo o BD
+    this.generate(size); //Inicializo la funicón que genere las empresas o las traiga de cualquer repo o BD
   }
 
   //Ahora acá hago la generación de los datos llenando el atributo del constructor
-  generate() {
-    const limit = 10;
+  generate(size) {
+    const limit = size || 20;
     for (let i = 0; i < limit; i++) {
       this.empresas.push({
         id: faker.string.uuid(),

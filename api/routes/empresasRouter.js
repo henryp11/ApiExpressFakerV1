@@ -13,8 +13,14 @@ const service = new EmpresasServices();
 
 //Get para todas las empresas
 router.get("/", async (req, res) => {
-  const empresas = await service.find(); //Invoco al método creado en el servicio
-  res.json(empresas);
+  let empresa = [];
+  if (req.query) {
+    const serviceQuery = new EmpresasServices(req.query.limit);
+    empresa = await serviceQuery.find();
+  } else {
+    empresa = await service.find(); //Invoco al método creado en el servicio
+  }
+  res.json(empresa);
 });
 
 //Get para empresa por id
